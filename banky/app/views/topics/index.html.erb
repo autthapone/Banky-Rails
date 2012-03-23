@@ -1,0 +1,22 @@
+<h1>Listing topics 
+	<% if current_user.try(:admin?) %>
+		<a href='/topics/new' class='btn btn-small pull-right'><i class='icon-plus'></i> New Post</a>
+	<% end %>
+</h1>
+
+<ul class='main-list well'>
+<% @topics.each do |topic| %>
+  <li class='row-fluid'>
+    <div class='span6'><%= topic.title %></div>
+    <div class='pull-right'>
+      <a href="<%= topic_path(topic) %>" class='btn btn-mini'><i class='icon-zoom-in'></i></a>
+      <% if current_user.try(:admin?) %>
+      	<a href="<%= edit_topic_path(topic) %>" class='btn btn-mini'><i class='icon-edit'></i></a>
+      	<a href="<%= topic_path(topic) %>" class='btn btn-danger btn-mini' data-confirm='Are you sure?' data-method='delete' rel='nofollow'><i class='icon-remove'></i></a>
+      <% end %>
+    </div>
+  </li>
+<% end %>
+</ul>
+
+<br />
